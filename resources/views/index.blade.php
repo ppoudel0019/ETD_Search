@@ -28,7 +28,8 @@
     
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
         <div class="center-screen">
-                <h1><form action="form.php" method="post"> 
+                <h1><form action="/search" method="post"> 
+                @csrf
                     <input type="text" name="term" />
                     <input type="submit" value="Search" /> <i class="fa fa-search"></i></h1>
                     </form> 
