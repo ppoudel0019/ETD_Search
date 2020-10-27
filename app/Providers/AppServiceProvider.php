@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(ArticlesRepository::class, function($app) {
+            // ...
+        });
+
+        $this->bindSearchClient();
     }
 
     /**
@@ -23,6 +27,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
+    }
+
+
+private function bindSearchClient()
+    {
+        $this->app->bind(Client::class, function ($app) {
+            return ClientBuilder::create()
+                ->setHosts(config('services.search.hosts'))
+                ->build();
+        });
     }
 }

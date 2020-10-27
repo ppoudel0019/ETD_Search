@@ -32,7 +32,51 @@ if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
 */
 
 require __DIR__.'/../vendor/autoload.php';
+$client = Elasticsearch\ClientBuilder::create()->build();
 
+$json = '{
+    "query" : {
+        "match" : {
+            "description" : "foot"
+        }
+    }
+}';
+
+$params = [
+    'index' => 'images',
+    'body'  => $json
+];
+
+$query = $client->search($params);
+
+if($query['hits']['total'] >=1)
+    {
+      $results = $query['hits']['hits'];
+    }
+  
+
+if(isset($results)) {
+    foreach($results as $r) {
+        echo $r['_source']['description'] ;
+     echo nl2br("\r\n");
+    }
+
+//echo $results['hits']['hits'][0]['_source']['description'];
+//echo nl2br("\r\n");
+    }
+
+
+
+
+//$doc   =$results['hits']['hits'][0]['_source']['figid'];
+
+
+//print_r($doc);
+
+//print_r($doc);
+
+
+//print_r($description);
 /*
 |--------------------------------------------------------------------------
 | Run The Application
