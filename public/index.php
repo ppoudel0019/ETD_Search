@@ -32,10 +32,43 @@ if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
 */
 
 require __DIR__.'/../vendor/autoload.php';
+//*$client = Elasticsearch\ClientBuilder::create()->build();
+
+
+
 /*$client = Elasticsearch\ClientBuilder::create()->build();
 
+$extension="json";
+// $folder_name=11042;
 
-*/ 
+$main_dir= new RecursiveDirectoryIterator('/Users/poojapoudel/desktop/dissertation');
+// $path = '/Users/anuradhamantena/WP/dissertation/';
+// $c=0;
+foreach (new RecursiveIteratorIterator($main_dir) as $key => $folder_name) {
+
+    $ext = pathinfo($folder_name, PATHINFO_EXTENSION);
+    if($ext == $extension) {
+        // $file = '11042/11042.json';
+        $json = file_get_contents($folder_name);
+        // print($json);
+        $params = [
+  'index' => 'projectsdata',
+  'body'  => $json
+        ];
+
+        try{
+            $response = $client->index($params);
+        } catch(Exception $e) {
+
+            }
+        }
+    }
+      function sendResponseToElasticSearch($params){
+          $client = $GLOBALS["client"];
+          print_r($client);
+      }
+
+*/
 /*
 |--------------------------------------------------------------------------
 | Run The Application

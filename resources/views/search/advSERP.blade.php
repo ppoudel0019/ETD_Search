@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Main Page</title>
+        <title>Advanced Search</title>
 
         <!-- Fonts -->
 
@@ -41,25 +40,34 @@
 
 $client = Elasticsearch\ClientBuilder::create()->build();
 
-$q=Request::get('q');
+
+$title=Request::get('title');
+$author=Request::get('author');
+$subject=Request::get('subject');
+$date=Request::get('date');
+$description=Request::get('description');
+
+
+$q=$title." ".$author." ".$subject." ".$description." ".$date;
+echo $q;
 
 $params = [
-  'index' => 'projectdata',
-  'body'  => [
-      'query'=> [
-         'bool' => [
-             'must' => [
-                 'multi_match' => [
-                 'query' => $q,
-                 'fields' => ['title', 'contributor_author', 'degree_name', 'degree_level', 'description_abstract','publisher','type','contributor_department','identifier_uri','relation_haspart']
-                 ]
-                ]
-             ]
-                 ],
-    'size'=> 50
-         ]
-
-];
+    'index' => 'projectdata',
+    'body'  => [
+        'query'=> [
+           'bool' => [
+               'must' => [
+                   'multi_match' => [
+                   'query' => $q,
+                   'fields' => ['title', 'contributor_author','description_abstract','publisher','type','contributor_department','identifier_uri','relation_haspart']
+                   ]
+                  ]
+               ]
+                   ],
+      'size'=> 50
+           ]
+  
+  ];
 
 try{
 $response = $client->search($params);

@@ -18,4 +18,22 @@ class ImageController extends Controller
     
     
 }
+
+
+public function advsearch(Request $request)
+{
+    $q= $request->input('q');
+    //echo $q;
+    return view('search.adv')->with($q);   
+}
+
+
+
+public function advSERP(Request $request)
+{
+    $q= $request->input('q');
+    //echo $q;
+    return view('search.advSERP')->with($q);   
+}
+
 }

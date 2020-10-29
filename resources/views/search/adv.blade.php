@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Main Page</title>
+        <title>Advanced</title>
 
         <!-- Fonts -->
 
@@ -30,34 +30,23 @@
     
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100  sm:items-center sm:pt-0">
         <div class="center-screen">
-                <h1><form action="/search" method="POST"> 
-               
-                @csrf
-                    <input class="border border-red-500" type="text" name="q" >
-                    <input type="submit" value="Search" /> <i class="fa fa-search"></i></h1>
-                    </form> 
-
-                    <form action="{{URL::to('/advsearch')}}" method="POST">
-                   {{ csrf_field() }}
-		            <div class="form-box">
-		           <button class ="search-btn" type="submit"> Advanced Search</button>
-                     </form>
-             
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('user/profile') }}" class="text-sm text-gray-700 underline">Profile</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                        @endif
-                    @endif
-                </div>
-        </div>
-
-            @endif
+                <h1><form action="/advSERP" method="POST"> 
+            
+        {{ csrf_field() }}
+		  <div class="form-box">
+		  <input type ="text" class="search" name="title" > 
+		  <button class ="search-btn" type="submit"> Title</button>
+          <input type ="text" class="search" name="author" > 
+		  <button class ="search-btn" type="submit"> Author</button>
+          <input type ="text" class="search" name="subject"> 
+		  <button class ="search-btn" type="submit"> Subject</button>
+          <input type ="text" class="search" name="date"> 
+		  <button class ="search-btn" type="submit">Date</button><br>
+          <input type ="text" class="search" name="description"> 
+		  <button class ="search-btn" type="submit">Description</button><br>
+          <input type="submit" value="Search" /> <i class="fa fa-search"></i></h1>
+      
+      </form>
 
      
              
