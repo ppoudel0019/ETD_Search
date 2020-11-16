@@ -1,4 +1,9 @@
-<x-guest-layout>
+<!DOCTYPE html>
+<html>
+    <head>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        
+    </head><x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
             <x-jet-authentication-card-logo />
@@ -32,16 +37,20 @@
                 </label>
             </div>
 
-            <div class="flex items-center justify-end mt-4">
+           
+            <div class="block mt-4">
+   
+                <div class="g-recaptcha" data-sitekey="6Le4V-MZAAAAAFDYc4h5h0Hyx6L3fycu18YSvO2u"></div>
+
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
-
                 <x-jet-button class="ml-4">
                     {{ __('Login') }}
                 </x-jet-button>
+
             </div>
         </form>
     </x-jet-authentication-card>

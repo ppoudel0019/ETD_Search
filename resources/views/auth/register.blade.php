@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+        
+    </head>
+
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -8,7 +15,7 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
+            
             <div>
                 <x-jet-label value="{{ __('Name') }}" />
                 <x-jet-input class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
@@ -33,6 +40,7 @@
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
+                <div class="g-recaptcha" data-sitekey="6Le4V-MZAAAAAFDYc4h5h0Hyx6L3fycu18YSvO2u"></div>
 
                 <x-jet-button class="ml-4">
                     {{ __('Register') }}
