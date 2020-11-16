@@ -38,7 +38,7 @@
 		  
           <input type ="text" class="search" name="subject" placeholder="Subject">  
 		  
-          <input type ="text" class="search" name="date" placeholder="Date Published"> 
+          <input type ="text" class="search" name="date" placeholder="description"> 
 		
           <input type="submit" value="Search" /> <i class="fa fa-search"></i></h1>
       
