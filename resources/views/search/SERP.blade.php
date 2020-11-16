@@ -40,8 +40,7 @@
 
 $client = Elasticsearch\ClientBuilder::create()->build();
 
-$data=Request::get('q');
-$q = preg_replace('#(<[^>]+?[\x00-\x20"\'])(?:on|xmlns)[^>]*+>#iu', '$1>', $data);
+$q=Request::get('q');
 
 $params = [
   'index' => 'projectdata',
@@ -67,6 +66,8 @@ $response = $client->search($params);
 $score = $response['hits']['hits'][0]['_score'];
 $doc = $response['hits']['total']['value'];
 
+echo "Searched for: ".$q;
+echo "<br>";
 echo "Total results: ".$doc;
 foreach( $response['hits']['hits'] as $source){
     echo "
