@@ -9,6 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "biscolab/laravel-recaptcha": "^4.4",
+        "elasticsearch/elasticsearch": "~7.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -16,10 +18,7 @@
         "laravel/jetstream": "^1.3",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
-        "livewire/livewire": "^2.0",
-        "elasticsearch/elasticsearch": "~7.0"
-    
-
+        "livewire/livewire": "^2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
