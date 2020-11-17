@@ -27,3 +27,5 @@ Route::any('/search', [ImageController::class,'search']);
 Route::any('/advsearch', [ImageController::class,'advsearch']);
 
 Route::any('/advSERP', [ImageController::class,'advSERP']);
+
+Route::any('/mySearch', [ImageController::class,'mySearch']);

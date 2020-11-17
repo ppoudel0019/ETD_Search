@@ -14,6 +14,7 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <style>
+body {margin:100px;padding:0}
 
        
         </style>
@@ -28,12 +29,16 @@
                     <input class="border border-red-500" type="text" name="q" >
                     <input type="submit" value="Search" /> <i class="fa fa-search"></i></h1>
                     </form> 
-                    <form action="{{URL::to('/advsearch')}}" method="POST">
+                <form action="/advsearch" method="POST">
                    {{ csrf_field() }}
 		            <div class="form-box">
 		           <button class ="search-btn" type="submit">Advanced Search</button>
-                     </form>
-</div>
+                </form>
+
+               
+                   
+
+
 
 
 <?php
@@ -65,26 +70,35 @@ $response = $client->search($params);
 
 $score = $response['hits']['hits'][0]['_score'];
 $doc = $response['hits']['total']['value'];
-
+echo "<br>";
 echo "Searched for: ".$q;
 echo "<br>";
 echo "Total results: ".$doc;
 foreach( $response['hits']['hits'] as $source){
-    echo "
-    <div style='marigin: 10%'>
-      <div style='border: 0.1px  margin: 3%'>
 
-      <a href=".$source['_source']['identifier_sourceurl']."><p style='font-size:20px;'>".$source['_source']['title']."</p></b></a>
-      <p class='type'>".$source['_source']['contributor_author']."</p>
-      <p>".$source['_source']['publisher']."</p>
+$url=$source['_source']['identifier_sourceurl'];
+
+    echo "
+    
+    
+    <div style='marigin: 10%'>
+    <div style='border: 0.1px  margin: 3%'>
+
+    <a href=".$source['_source']['identifier_sourceurl']."><p style='font-size:20px;'>".$source['_source']['title']."</p></b></a>
+    <form action='/mySearch' method='POST'>
+    <input type='submit' name='submit' value='Save'> 
+      </form> 
+           
+    <p class='type'>".$source['_source']['description_abstract']."</p> 
+    <p class='type'>".$source['_source']['contributor_author']."</p>
+    <p>".$source['_source']['publisher']."</p>
     
         <br>
       </div>
     </div>";
     
 }      
-    
-    
+
 $doc = $response['hits']['total']['value'];
 
 }

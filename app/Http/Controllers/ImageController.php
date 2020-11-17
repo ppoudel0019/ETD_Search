@@ -36,4 +36,12 @@ public function advSERP(Request $request)
     return view('search.advSERP')->with($q);   
 }
 
+
+
+public function mySearch(Request $request)
+{
+   
+    return view('profile.show');   
+}
+
 }

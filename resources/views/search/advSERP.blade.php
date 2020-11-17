@@ -15,7 +15,7 @@
         <style>
 
         
-        
+body {margin:100px;padding:0}
 
             
         </style>
@@ -78,7 +78,11 @@ $response = $client->search($params);
 $score = $response['hits']['hits'][0]['_score'];
 
 $doc = $response['hits']['total']['value'];
-echo nl2br("\r\n");
+
+
+echo "<br>";
+echo "Searched for: ".$q;
+echo "<br>";
 echo "Total results: ".$doc;
 
 
@@ -89,6 +93,11 @@ foreach( $response['hits']['hits'] as $source){
     <br>
 
     <a href=".$source['_source']['identifier_sourceurl']."><p style='font-size:20px;'>".$source['_source']['title']."</p></b></a>
+    
+    <form action='/mySearch' method='POST'> 
+    <div class='form-box'>
+    <button class ='search-btn' type='submit'>Save</button>
+    <p class='type'>".$source['_source']['description_abstract']."</p> 
     <p class='type'>".$source['_source']['contributor_author']."</p>
     <p>".$source['_source']['publisher']."</p>
   
