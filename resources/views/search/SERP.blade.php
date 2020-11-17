@@ -60,26 +60,50 @@ $params = [
                 ]
              ]
                  ],
+                 "highlight" => [
+                    "fields" => [
+                        "*" => [
+                            "pre_tags" => [
+                                "<mark>"
+                            ],
+                            "post_tags" => [
+                                "</mark>"],
+                                'require_field_match' => false
+                            ]
+                        ]
+                    ]
+
+                ],
+
+
+
                  'size'=> 100
-         ]
+         
+         
 
 ];
 
-try{
-$response = $client->search($params);
 
-$score = $response['hits']['hits'][0]['_score'];
-$doc = $response['hits']['total']['value'];
-echo "<br>";
-echo "Searched for: ".$q;
-echo "<br>";
-echo "Total results: ".$doc;
+
+          try{
+            $response = $client->search($params);
+            
+            $score = $response['hits']['hits'][0]['_score'];
+            $doc = $response['hits']['total']['value'];
+            echo "<br>";
+            echo "Searched for: ".$q;
+            echo "<br>";
+            echo "Total results: ".$doc;
+
+
+
+
+
 foreach( $response['hits']['hits'] as $source){
 
 $url=$source['_source']['identifier_sourceurl'];
 
     echo "
-    
     
     <div style='marigin: 10%'>
     <div style='border: 0.1px  margin: 3%'>
@@ -97,16 +121,58 @@ $url=$source['_source']['identifier_sourceurl'];
       </div>
     </div>";
     
-}      
+  } 
 
-$doc = $response['hits']['total']['value'];
+
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+print_r($response);  
 
 }
+
+
+
+
 catch(Exception $e) {
    
 }
 
+
+
+/*imp logic
+
+$data = app('es')->search($params);
+        // dump($data);die;
+        // dump($data['hits']['hits']);die;
+        foreach($data['hits']['hits'] as $k => $v){
+            // dump($data['hits']['hits'][$k]['_source']['long_title']);die;
+            $data['hits']['hits'][$k]['_source']['long_title'] = $v['highlight']['long_title'][0];
+        }
+        $realData = $data['hits']['hits'];
+        return view('web.member.search',[
+            'realData' => $realData
+*/
+
 ?>
+
+
+
+
 
 </body>
 </html>
+
+
