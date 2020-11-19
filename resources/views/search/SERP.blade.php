@@ -132,7 +132,6 @@ echo "<br>";
 
 
 echo '
-
 <table class="table table-borderless" id="dt2">
 <thead>
 <th></th>
@@ -142,24 +141,14 @@ echo '
 
 
 foreach( $response['hits']['hits'] as $source){
-$ltitle= (isset($source['_source']['title'])? $source['_source']['title'] : "");
+$title= (isset($source['_source']['title'])? $source['_source']['title'] : "");
 $description= (isset($source['_source']['description_abstract'])? $source['_source']['description_abstract'] : "");
-
-$lauthor = (isset($source['_source']['contributor_author']) ? $source['_source']['contributor_author'] : "");
-$lpublisher= (isset($source['_source']['publisher']) ? $source['_source']['publisher'] : "");
+$publisher= (isset($source['_source']['publisher']) ? $source['_source']['publisher'] : "");
 $sourceURL = (isset($source['_source']['identifier_uri']) ? $source['_source']['identifier_uri'] : ""); 
 
 
 
- 
- 
-
- 
-
-
-
-
-echo "<tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."' target='_blank'><div class='link'>$ltitle</div></u></a>";
+echo "<tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."' target='_blank'><div class='link'>$title</div></u></a>";
 
 
 
@@ -178,20 +167,13 @@ if (Auth::check())
   }
 
   
-  echo"<br>$description<br>$lpublisher<br>
+  echo"<br>$description<br>$publisher<br>
   </td></tr>";
-
-
-
 
 }
 
 
 echo "</tbody></table>";
-
-
-
-
 
 ?>
 

@@ -151,10 +151,23 @@ $sourceURL = (isset($source['_source']['identifier_uri']) ? $source['_source']['
 
 echo "
 <tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."' target='_blank'>
-<div class='link'>$ltitle</div></u></a>
-<form action='/mySearch' method='POST'>
-<input class='button' type='submit' name='submit' value='Save'> 
-</form>
+<div class='link'>$ltitle</div></u></a>";
+if (Auth::check())
+  { 
+ 
+    echo"
+    
+    <form action='/history' method='POST'>
+                 
+                   <br>
+		            
+                   <h6><input type='submit' value='Save' /></h6>
+                     </form>";
+
+  }
+
+
+echo"
 <br>$description<br>$lpublisher<br>
 </td></tr>";
 
