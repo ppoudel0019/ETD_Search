@@ -1,6 +1,44 @@
+
+
+{{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}
+
+
+{{ auth()->user()->email}}
+
+
+
 <?php
-echo "hello";
+
+$q=Request('q');
+
+echo "<br>";
 
 
-echo "future search history";
+if (Auth::check()) {
+    echo "trial page for search history";//
+
+
+    
+}
+
+
+      /*
+/DB::table('messages')->insert(
+                ['message' => $msg]
+            );
+            
+
+            @foreach ($users as $user)
+
+        {{ $user->name }} 
+        <br>
+@endforeach
+
+
+
+
+      
+    
 ?>
+
+

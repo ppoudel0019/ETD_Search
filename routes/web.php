@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\HistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,6 @@ Route::any('/advsearch', [ImageController::class,'advsearch']);
 
 Route::any('/advSERP', [ImageController::class,'advSERP']);
 
-Route::any('/mySearch', [ImageController::class,'mySearch']);
+Route::any('/history', [HistoryController::class,'store']);
+
+

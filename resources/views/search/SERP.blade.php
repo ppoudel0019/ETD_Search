@@ -10,7 +10,7 @@ integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 crossorigin="anonymous"></script>
 @stack("scripts")
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.css"/>
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.js"></script>
@@ -71,17 +71,31 @@ color: black;
                    {{ csrf_field() }}
                    <br>
 		            
-                   <h3><input type="submit" value="Advanced Search" /></button></h3>
+                   <h6><input type="submit" value="Advanced Search" /></h6>
                      </form>
+
+
+                    
+
+                     
+
+                     
+
+  
 </div>
 </div>
 
 
 <?php
 
+
+
 require '../vendor/autoload.php';
 
 $q=Request('q');
+
+$sql = "INSERT INTO history (title)
+ VALUES ($q)"; 
 
 $client = Elasticsearch\ClientBuilder::create()
 
@@ -105,7 +119,7 @@ $q ?? '',
 ];
 
 $response = $client->search($params);
-$score = $response['hits']['hits'][0]['_score'];
+
 $total = $response['hits']['total']['value'];
 
 echo'<div class="tcontent">';
@@ -122,11 +136,10 @@ echo '
 <table class="table table-borderless" id="dt2">
 <thead>
 <th></th>
-
-
-
 </thead>
 <tbody>';
+
+
 
 foreach( $response['hits']['hits'] as $source){
 $ltitle= (isset($source['_source']['title'])? $source['_source']['title'] : "");
@@ -135,11 +148,51 @@ $description= (isset($source['_source']['description_abstract'])? $source['_sour
 $lauthor = (isset($source['_source']['contributor_author']) ? $source['_source']['contributor_author'] : "");
 $lpublisher= (isset($source['_source']['publisher']) ? $source['_source']['publisher'] : "");
 $sourceURL = (isset($source['_source']['identifier_uri']) ? $source['_source']['identifier_uri'] : ""); 
-echo "<tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."' target='_blank'><div class='link'>$ltitle</div></u></a><br>$description<br>$lpublisher</td></tr>";
+
+
+
+ 
+ 
+
+ 
+
+
+
+
+echo "<tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."' target='_blank'><div class='link'>$ltitle</div></u></a>";
+
+
+
+if (Auth::check())
+  { 
+ 
+    echo"
+    
+    <form action='/history' method='POST'>
+                 
+                   <br>
+		            
+                   <h6><input type='submit' value='Save' /></h6>
+                     </form>";
+
+  }
+
+  
+  echo"<br>$description<br>$lpublisher<br>
+  </td></tr>";
+
+
+
+
 }
 
+
 echo "</tbody></table>";
-$doc = $response['hits']['hits'][0]['_source']['title'];
+
+
+
+
+
 ?>
 
 
@@ -166,3 +219,5 @@ $("body").unmark().mark("{{$q}}");
 </script>
 
 
+</body>
+</html>

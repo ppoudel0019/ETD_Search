@@ -50,6 +50,10 @@ color: black;
 
 }
 
+.button{
+    color:blue;
+    padding: 14px 40px;}
+
 
 </style>
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -144,7 +148,18 @@ $description= (isset($source['_source']['description_abstract'])? $source['_sour
 $lauthor = (isset($source['_source']['contributor_author']) ? $source['_source']['contributor_author'] : "");
 $lpublisher= (isset($source['_source']['publisher']) ? $source['_source']['publisher'] : "");
 $sourceURL = (isset($source['_source']['identifier_uri']) ? $source['_source']['identifier_uri'] : ""); 
-echo "<tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."' target='_blank'><div class='link'>$ltitle</div></u></a><br>$description<br>$lpublisher</td></tr>";
+
+echo "
+<tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."' target='_blank'>
+<div class='link'>$ltitle</div></u></a>
+<form action='/mySearch' method='POST'>
+<input class='button' type='submit' name='submit' value='Save'> 
+</form>
+<br>$description<br>$lpublisher<br>
+</td></tr>";
+
+
+
 }
 
 echo "</tbody></table>";

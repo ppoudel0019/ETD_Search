@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
 
 
 
@@ -38,10 +40,5 @@ public function advSERP(Request $request)
 
 
 
-public function mySearch(Request $request)
-{
-   
-    return view('profile.show');   
-}
 
 }
