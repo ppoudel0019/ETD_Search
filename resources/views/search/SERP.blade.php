@@ -3,11 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
 @stack("styles")
 <script
 src="https://code.jquery.com/jquery-3.5.1.js"
 integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
 crossorigin="anonymous"></script>
+
+
 @stack("scripts")
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -15,6 +19,10 @@ crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.22/datatables.min.js"></script>
 <style>
+
+.NEWCLASS {
+    font-family: FontAwesome;
+}
 
 .content {
   align:center;
@@ -59,13 +67,46 @@ color: black;
 
 
 <body>
+
+<script>
+var recognition = new webkitSpeechRecognition();
+
+recognition.onresult = function(event) { 
+  var saidText = "";
+  for (var i = event.resultIndex; i < event.results.length; i++) {
+    if (event.results[i].isFinal) {
+      saidText = event.results[i][0].transcript;
+    } else {
+      saidText += event.results[i][0].transcript;
+    }
+  }
+  // Update Textbox value
+  document.getElementById('speechText').value = saidText;
+ 
+  // Search Posts
+  searchPosts(saidText);
+}
+
+function startRecording(){
+  recognition.start();
+}
+
+</script>
     
         <div class="content">
                 <form action="/search" method="POST"> 
                
                 @csrf
-                    <input class="border border-red-500" type="text" name="q" >
-                    <input type="submit" value="Search" /> 
+                <input class="border border-red-500" id='speechText' type="text" name="q" >
+                <input class="NEWCLASS btn btn-warning" type='button' id='start' value='&#xf130;' onclick='startRecording();'>
+                <input type="submit" value="Search" /> 
+                  
+
+
+
+
+
+
                     </form> 
                     <form action="{{URL::to('/advsearch')}}" method="POST">
                    {{ csrf_field() }}
