@@ -195,17 +195,26 @@ echo "<tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."'
 
 if (Auth::check())
   { 
- 
-    echo"
-    
-    <form action='/history' method='POST'>
-                 
-                   <br>
-		            
-                   <h6><input type='submit' value='Save' /></h6>
-                     </form>";
+ ?>
+   
+   
+   <form method="POST" action="history" >
+            @csrf
+          
+<input type="hidden" name="title" value="<? echo $title?>" />  
+<input type="hidden" name="sourceURL" value="<? echo $sourceURL?>" />  
+<input type="hidden" name="publisher" value="<? echo $publisher?>" />  
+    <x-jet-button class="ml-4">
+                 {{ __('Save') }}
+                </x-jet-button>
+                </form>
 
+
+
+    
+<?php
   }
+
 
   
   echo"<br>$description<br>$publisher<br>
@@ -214,9 +223,36 @@ if (Auth::check())
 }
 
 
+
+
 echo "</tbody></table>";
 
+
+
+/*this worked
+
+
+
+<form method="POST" action="history" >
+            @csrf
+          
+<input type="hidden" name="title" value="<? echo $title ?>" />  
+    <x-jet-button class="ml-4">
+                 {{ __('Save') }}
+                </x-jet-button>
+                </form>
+
+*/
+
 ?>
+
+
+
+
+
+
+
+
 
 
 <script src="https://cdn.jsdelivr.net/mark.js/7.0.0/jquery.mark.min.js"></script>

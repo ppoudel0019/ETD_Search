@@ -14,11 +14,13 @@ class CreateHistoriesTable extends Migration
     public function up()
     {
         Schema::create('histories', function (Blueprint $table) {
-            $table->id();
-          
+           // $table->string('id')->primary();
+            
+            $table->foreignId('user_id')->index();
             $table->string('url');
             $table->string('title');
-            $table->timestamp('created_at')->nullable();
+            $table->string('description_abstract');
+     
             $table->timestamps();
         });
        

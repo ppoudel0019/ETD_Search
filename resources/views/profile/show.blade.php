@@ -8,11 +8,11 @@
             {{ __('Profile') }}
         </h2>
     </x-slot>
-    <form method="POST" action="/history">
+    <form method="POST" action="/myhistory">
             @csrf
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
     <x-jet-button class="ml-4">
-                 {{ __('History') }}
+                 {{ __('Saved Items') }}
                 </x-jet-button>
                 </form>
                 </div>

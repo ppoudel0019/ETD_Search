@@ -29,6 +29,8 @@ Route::any('/advsearch', [ImageController::class,'advsearch']);
 
 Route::any('/advSERP', [ImageController::class,'advSERP']);
 
-Route::any('/history', [HistoryController::class,'store']);
+Route::any('/myhistory', [HistoryController::class,'display']);
 
+Route::any('/history', [HistoryController::class,'save']);
 
+Route::any('/remove', [HistoryController::class,'remove']);

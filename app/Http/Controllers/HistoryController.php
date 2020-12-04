@@ -15,11 +15,60 @@ use Illuminate\Database\Query\Builder;
 class HistoryController extends Controller
 {
     
-public function store(Request $request)
+
+
+
+    public function create()
 {
+    
+    return view('search.save');   
+}
+
+public function display()
+{
+    
+    return view('search.mySearch');   
+}
 
 
-    $request->validate([
+
+
+
+public function save(Request $request)
+{
+    $q= $request->input('q');
+    return view('search.save')->with($q);   
+}
+
+public function remove(Request $request)
+{
+    
+
+    $q= $request->input('q');
+
+    
+    return view('search.remove')->with($q);  
+
+    
+}
+
+
+/*
+public function advSERP(Request $request)
+{
+    $q= $request->input('q');
+    //echo $q;
+    return view('search.advSERP')->with($q);   
+}
+
+
+$history=new History;
+    $history->title=request('title');
+    $history->sourceURL=request('SourceURL');
+    //$q= $request->input('title');
+    //echo $q;
+   
+$request->validate([
         'title' => 'required',
         ]);
     $input=[];
@@ -30,4 +79,27 @@ public function store(Request $request)
      return $history;
  
 }
+
+
+
+
+
+    public function create()
+    {
+        $history= new History;
+
+
+        $history->title="what";
+       $history->save(); 
+       return Redirect::back();
+    }
+*/
+
+
+
+
+
+
+
+
 }
