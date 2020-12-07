@@ -13,7 +13,6 @@
                 </div>
                 @endif
 
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -74,14 +73,16 @@ color: black;
 
 }
 
+.container {
+  display: float;
+  margin:5px;
+}
+
+
 
 </style>
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-
-
-
-
 <body>
 
 <script>
@@ -116,36 +117,18 @@ function startRecording(){
                 <input class="border border-red-500" id='speechText' type="text" name="q" >
                 <input class="NEWCLASS btn btn-warning" type='button' id='start' value='&#xf130;' onclick='startRecording();'>
                 <input type="submit" value="Search" /> 
-                  
-
-
-
-
-
-
                     </form> 
                     <form action="{{URL::to('/advsearch')}}" method="POST">
                    {{ csrf_field() }}
                    <br>
 		            
                    <h6><input type="submit" value="Advanced Search" /></h6>
-                     </form>
-
-
-                    
-
-                     
-
-                     
-
-  
+                     </form> 
 </div>
 </div>
 
 
 <?php
-
-
 
 require '../vendor/autoload.php';
 
@@ -161,18 +144,19 @@ $params = [
      'index' => 'projectdata',
       'body' => [
 'query'=> [
-'bool' => [
-'must' => [
-'multi_match' => [
-'query' => 
-$q ?? '',
-'fields' => ['title^3', 'degree_name', 'degree_level', 'description_abstract','publisher','type','contributor_department','identifier_uri','relation_haspart']
-]
-]
-]
-],
- 'size'=> 100
-]
+     'bool' => [
+        'must' => [
+          'multi_match' => [
+                'query' => 
+                       $q ?? '',
+                 'fields' => ['title', 'description_abstract','publisher','type','contributor_department','handle']
+             ]
+           ]
+         ]
+       ],
+
+    'size'=> 100
+   ]
 ];
 
 $response = $client->search($params);
@@ -180,14 +164,13 @@ $response = $client->search($params);
 $total = $response['hits']['total']['value'];
 
 echo'<div class="tcontent">';
-
 echo "Searched for: ".$q;
 echo "<br>";
 echo "Total results: ".$total;
 echo "<br>";
 echo "<br>";
 
-
+//table for results
 echo '
 <table class="table table-borderless" id="dt2">
 <thead>
@@ -202,75 +185,89 @@ $title= (isset($source['_source']['title'])? $source['_source']['title'] : "");
 $description= (isset($source['_source']['description_abstract'])? $source['_source']['description_abstract'] : "");
 $publisher= (isset($source['_source']['publisher']) ? $source['_source']['publisher'] : "");
 $sourceURL = (isset($source['_source']['identifier_uri']) ? $source['_source']['identifier_uri'] : ""); 
+$pnum = (isset($source['_source']['handle']) ? $source['_source']['handle'] : ""); 
+
+//$ploc = (isset($source['_source']['relation_haspart']) ? array($source['_source']['relation_haspart']) : "");
 
 
-
+//table
 echo "<tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."' target='_blank'><div class='link'>$title</div></u></a>";
+
+
+
+//$href="/dissertation/".$pnum."/".$pdfloc;
+//echo $href;
+//echo $pnum;
+//$pdfloc=print_r($ploc,true);
+//print_r(array_values($ploc));
+//echo'<br>';
+//var_dump($ploc);
+
+$path="/Users/poojapoudel/desktop/webpro/public/dissertation/".$pnum."/";
+//echo $path;
+
+
+//scanning all directories
+$dir=scandir($path); 
+
+
+foreach($dir as $file){
+  $fname=$path.$file;
+  //echo $fname;
+}
+
+//if the file is pdf 
+if(mime_content_type($fname)=='application/pdf')
+{
+
+$name="/dissertation/".$pnum."/".$file;
+
+?>
+<div class="container">
+<x-jet-button class="ml-4">
+<a  href='<?php echo $name; ?>'download>Download</a>
+</x-jet-button>
+</div>
+
+<?php
+}
 
 
 
 if (Auth::check())
   { 
  ?>
-   
-   
-   <form method="POST" action="history" >
+
+<form method="POST" action="history" >
             @csrf
           
 <input type="hidden" name="title" value="<? echo $title?>" />  
 <input type="hidden" name="sourceURL" value="<? echo $sourceURL?>" />  
 <input type="hidden" name="description" value="<? echo $description?>" />  
 <input type="hidden" name="publisher" value="<? echo $publisher?>" /> 
+
+<div class="container">
     <x-jet-button class="ml-4">
                  {{ __('Save') }}
                 </x-jet-button>
+             </div>   
                 </form>
-
-
-
     
 <?php
   }
 
-
-  
   echo"<br>$description<br>$publisher<br>
   </td></tr>";
 
 }
+echo "</tbody></table>"; 
+//table ends
 
 
 
-
-echo "</tbody></table>";
-
-
-
-/*this worked
-
-
-
-<form method="POST" action="history" >
-            @csrf
-          
-<input type="hidden" name="title" value="<? echo $title ?>" />  
-    <x-jet-button class="ml-4">
-                 {{ __('Save') }}
-                </x-jet-button>
-                </form>
-
-*/
+//JS for pagination and highlight
 
 ?>
-
-
-
-
-
-
-
-
-
 
 <script src="https://cdn.jsdelivr.net/mark.js/7.0.0/jquery.mark.min.js"></script>
 <script>
