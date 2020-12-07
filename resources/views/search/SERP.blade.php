@@ -1,3 +1,19 @@
+<div style="margin-left:10%;margin-top:1%;">
+@if (Route::has('login'))
+                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    @auth
+                        <a href="{{ url('user/profile') }}" class="text-sm text-gray-700 underline">Profile</a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
+                        @endif
+                    @endif
+                </div>
+                @endif
+
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -203,7 +219,8 @@ if (Auth::check())
           
 <input type="hidden" name="title" value="<? echo $title?>" />  
 <input type="hidden" name="sourceURL" value="<? echo $sourceURL?>" />  
-<input type="hidden" name="publisher" value="<? echo $publisher?>" />  
+<input type="hidden" name="description" value="<? echo $description?>" />  
+<input type="hidden" name="publisher" value="<? echo $publisher?>" /> 
     <x-jet-button class="ml-4">
                  {{ __('Save') }}
                 </x-jet-button>
