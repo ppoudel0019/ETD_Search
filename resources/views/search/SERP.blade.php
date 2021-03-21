@@ -1,3 +1,4 @@
+<!-- @ppoudel-->
 <div style="margin-left:10%;margin-top:1%;">
 @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -78,8 +79,6 @@ color: black;
   margin:5px;
 }
 
-
-
 </style>
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -130,6 +129,8 @@ function startRecording(){
 
 <?php
 
+//ELASTICSEARCH
+
 require '../vendor/autoload.php';
 
 $q=Request('q');
@@ -178,8 +179,6 @@ echo '
 </thead>
 <tbody>';
 
-
-
 foreach( $response['hits']['hits'] as $source){
 $title= (isset($source['_source']['title'])? $source['_source']['title'] : "");
 $description= (isset($source['_source']['description_abstract'])? $source['_source']['description_abstract'] : "");
@@ -203,7 +202,7 @@ echo "<tr><td><u><h5><a role='button' class='btn btn-link' href='".$sourceURL."'
 //echo'<br>';
 //var_dump($ploc);
 
-$path="/Users/poojapoudel/desktop/webpro/public/dissertation/".$pnum."/";
+$path="/Users/poojapoudel/desktop/MyProjects/ETDSearchEngine/public/dissertation/".$pnum."/";
 //echo $path;
 
 
@@ -232,7 +231,7 @@ $name="/dissertation/".$pnum."/".$file;
 <?php
 }
 
-
+//If authorized, display the save button, pass the search item variables to save.php
 
 if (Auth::check())
   { 

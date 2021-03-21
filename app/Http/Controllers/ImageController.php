@@ -14,11 +14,7 @@ class ImageController extends Controller
 {
     $q= $request->input('q');
     //echo $q;
-    return view('search.SERP')->with($q);
-
-   
-    
-    
+    return view('search.SERP')->with($q);   
 }
 
 

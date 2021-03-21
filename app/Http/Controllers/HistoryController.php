@@ -14,9 +14,6 @@ use Illuminate\Database\Query\Builder;
 
 class HistoryController extends Controller
 {
-    
-
-
 
     public function create()
 {

@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+<!-- @ppoudel-->
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 <meta charset="utf-8">
@@ -166,12 +168,9 @@ if (Auth::check())
 
   }
 
-
 echo"
 <br>$description<br>$lpublisher<br>
 </td></tr>";
-
-
 
 }
 
