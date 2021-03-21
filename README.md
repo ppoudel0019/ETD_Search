@@ -14,7 +14,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 ## ETD Search
 More details:  [Here](https://github.com/ppoudel0019/ETD_Search/blob/master/ETD_Search.pdf)
 
-ETD Search is a web application designed for searching and querying of research thesis and dissertations. This application is going to provide advanced search options for searching through research database and make the search process quick and easy. 
+ETD Search is a web application designed for searching and querying of research thesis and dissertations. 
 
 The application is built in PHP with Laravel framework. Html, CSS, and JavaScript is used for the User Interface. It uses MySQL database for storing the user information. Search functionality is implemented with Elasticsearch. 
 
