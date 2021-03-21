@@ -1,3 +1,20 @@
+## ETD Search
+
+ETD Search is a web application for searching electronic theses and dissertations. It is built in PHP with Laravel framework. Html, CSS, and JavaScript is used for the User Interface. It uses MySQL database for storing the user information. Search functionality is implemented with Elasticsearch. 
+
+More details:  [Here](https://github.com/ppoudel0019/ETD_Search/blob/master/ETD_Search.pdf)
+
+
+
+
+
+
+
+
+
+## About Laravel
+
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects.
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
@@ -7,12 +24,4 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-## ETD Search
-
-ETD Search is a search engine for searching electronic theses and dissertations. It is built in PHP with Laravel framework. Html, CSS, and JavaScript is used for the User Interface. It uses MySQL database for storing the user information. Search functionality is implemented with Elasticsearch. 
-
-More details:  [Here](https://github.com/ppoudel0019/ETD_Search/blob/master/ETD_Search.pdf)
